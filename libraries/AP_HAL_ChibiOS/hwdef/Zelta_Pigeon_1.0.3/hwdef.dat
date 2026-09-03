@@ -109,11 +109,7 @@ IMU Invensensev3 I2C:0:0x68 ROTATION_NONE
 COMPASS MMC5XX3 I2C:0:0x30 false ROTATION_NONE
 
 # DMA Priority for Motor Timers
-DMA_PRIORITY TIM8*
-
-# Explicit DMA assignments for I2C1 (Required for STM32F4 I2C driver)
-STM32_I2C_I2C1_RX_DMA_STREAM 5
-STM32_I2C_I2C1_TX_DMA_STREAM 7
+DMA_PRIORITY TIM8* I2C1*
 
 # external compass types
 define AP_COMPASS_PROBING_ENABLED 1
