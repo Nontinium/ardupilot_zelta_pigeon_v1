@@ -17,33 +17,18 @@ FLASH_SIZE_KB 1024
 # bootloader starts at zero offset
 FLASH_RESERVE_START_KB 0
 
-# USB setup
+MCU STM32F4xx STM32F405xx
+APJ_BOARD_ID AP_HW_ZELTAPIGEON103
+OSCILLATOR_HZ 0
+FLASH_SIZE_KB 1024
+FLASH_RESERVE_START_KB 0
 USB_STRING_MANUFACTURER "ArduPilot"
-
-# baudrate to run bootloader at on uarts
 define BOOTLOADER_BAUDRATE 115200
-
-# the location where the bootloader will put the firmware
 FLASH_BOOTLOADER_LOAD_KB 48
-
-# order of UARTs (and USB)
 SERIAL_ORDER OTG1
-
-# PA10 IO-debug-console
 PA11 OTG_FS_DM OTG1
 PA12 OTG_FS_DP OTG1
-
 PA13 JTMS-SWDIO SWD
 PA14 JTCK-SWCLK SWD
-
-# SPI1 Bus Pins (Required for bootloader to communicate with flash memory)
-PA5 SPI1_SCK SPI1
-PA6 SPI1_MISO SPI1
-PA7 SPI1_MOSI SPI1
-
-# Chip select pins
-PA4 FLASH1_CS CS
-PB12 NRF1_CS CS
-
 PA8 LED_BOOTLOADER OUTPUT LOW
 define HAL_LED_ON 0
