@@ -1,30 +1,37 @@
-# hw definition file for processing by chibios_pins.py
-# for minimal F405 bootloader
+# hw definition file for processing by chibios_hwdef.py
+# for Zelta_Pigeon REV_1.0.3 hardware.
+# derived from speedybee405mini
 
 # MCU class and specific type
 MCU STM32F4xx STM32F405xx
 
-# board ID. See Tools/AP_Bootloader/board_types.txt
-APJ_BOARD_ID AP_HW_MATEKF405
+# board ID for firmware load
+APJ_BOARD_ID AP_HW_ZELTAPIGEON103
 
-# crystal frequency
+# crystal frequency, setup to use external oscillator
 OSCILLATOR_HZ 16000000
 
 FLASH_SIZE_KB 1024
-
-# bootloader is installed at zero offset
+FLASH_USE_MAX_KB 16
 FLASH_RESERVE_START_KB 0
+FLASH_BOOTLOADER_LOAD_KB 64
 
 # LEDs
-PA8 LED_BOOTLOADER OUTPUT LOW
-PA9 LED_ACTIVITY  OUTPUT LOW
+PC2 LED_BOOTLOADER OUTPUT LOW
 define HAL_LED_ON 0
-
-# the location where the bootloader will put the firmware
-FLASH_BOOTLOADER_LOAD_KB 64
 
 # order of UARTs
 SERIAL_ORDER OTG1
 
 PA11 OTG_FS_DM OTG1
 PA12 OTG_FS_DP OTG1
+
+PA13 JTMS-SWDIO SWD
+PA14 JTCK-SWCLK SWD
+
+DEFAULTGPIO OUTPUT LOW PULLDOWN
+
+# Chip select pins
+PC13 FLASH1_CS CS
+PC3 OSD1_CS CS
+PC5 GYRO1_CS CS
