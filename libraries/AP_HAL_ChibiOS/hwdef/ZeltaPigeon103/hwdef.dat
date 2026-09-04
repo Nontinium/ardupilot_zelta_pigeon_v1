@@ -111,7 +111,7 @@ define HAL_LOGGING_DATAFLASH_ENABLED 1
 # IMU setup
 
 # IMU setup
-#IMU Invensensev3 I2C:0:0x68 ROTATION_NONE
+IMU Invensensev3 I2C:0:0x68 ROTATION_NONE
 
 # Mag Setup
 #COMPASS MMC5XX3 I2C:0:0x30 false ROTATION_NONE
@@ -132,5 +132,4 @@ define HAL_USE_ADC FALSE
 
 # minimal drivers to reduce flash usage
 include ../include/minimize_common.inc
-include ../include/minimize_fpv_osd.inc
 include ../include/no_bootloader_DFU.inc
