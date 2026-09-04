@@ -163,7 +163,7 @@ BARO BMP388       I2C:0:0x76
 # ArduPilot driver probes the IMU.
 PA15 IMU_CLKIN INPUT
 define ICM42688_CLKIN 1
-define HAL_BOARD_INIT_HOOK_CALL hal_imu_clkin_pwm_setup(STM32_TIM2, 1, GPIOA, 15, 1, 32768);
+#define HAL_BOARD_INIT_HOOK_CALL hal_imu_clkin_pwm_setup(STM32_TIM2, 1, GPIOA, 15, 1, 32768);
 
 define HAL_LOGGING_DATAFLASH_ENABLED 1
 
