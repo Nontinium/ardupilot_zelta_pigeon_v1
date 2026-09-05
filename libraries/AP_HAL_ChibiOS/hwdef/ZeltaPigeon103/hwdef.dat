@@ -129,6 +129,7 @@ define HAL_DEFAULT_INS_FAST_SAMPLE 3
 # Motor order implies Betaflight/X for standard ESCs
 define HAL_FRAME_TYPE_DEFAULT 12
 define HAL_USE_ADC FALSE
+HAL_PERIPH_ENABLE_SCRIPTING 1
 
 # minimal drivers to reduce flash usage
 include ../include/minimize_common.inc
