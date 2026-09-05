@@ -673,13 +673,33 @@ void AP_InertialSensor_Invensensev3::read_fifo()
         // gets passed all the way down to the SPI DMA handling. This involves one transfer to send
         // the register read and then another using the same buffer and length which is handled specially
         // for the read
-        tfr_buffer[0] = reg_data | BIT_READ_FLAG;
-        // transfer will also be sending data, make sure that data is zero
-        memset(tfr_buffer + 1, 0, n * fifo_sample_size);
-        if (!dev->transfer_fullduplex(tfr_buffer, n * fifo_sample_size + 1)) {
-            goto check_registers;
+        if (dev->bus_type() == AP_HAL::Device::BUS_TYPE_I2C) {
+
+            // I2C does not use the SPI read flag.
+            // Read FIFO data directly starting at FIFO_DATA register.
+            if (!dev->read_registers(reg_data,
+                                     tfr_buffer,
+                                     n * fifo_sample_size)) {
+                goto check_registers;
+            }
+
+            samples = tfr_buffer;
+
+        } else {
+
+            // SPI path
+            tfr_buffer[0] = reg_data | BIT_READ_FLAG;
+
+            // transfer will also be sending data, make sure that data is zero
+            memset(tfr_buffer + 1, 0, n * fifo_sample_size);
+
+            if (!dev->transfer_fullduplex(tfr_buffer,
+                                           n * fifo_sample_size + 1)) {
+                goto check_registers;
+            }
+
+            samples = tfr_buffer + 1;
         }
-        samples = tfr_buffer + 1;
 
 #if HAL_INS_HIGHRES_SAMPLE
         if (highres_sampling) {
@@ -979,8 +999,8 @@ void AP_InertialSensor_Invensensev3::set_filter_and_scaling(void)
  */
 void AP_InertialSensor_Invensensev3::set_filter_and_scaling_icm42670(void)
 {
-    backend_rate_hz = 200;
-    sampling_rate_hz = 200;
+    backend_rate_hz = 1600;
+    sampling_rate_hz = 1600;
     // use low-noise mode
     register_write(INV3REG_70_PWR_MGMT0, 0x0f);
     hal.scheduler->delay_microseconds(300);
