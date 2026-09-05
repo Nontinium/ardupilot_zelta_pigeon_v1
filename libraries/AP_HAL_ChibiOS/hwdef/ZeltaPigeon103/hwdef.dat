@@ -106,12 +106,12 @@ define HAL_LOGGING_DATAFLASH_ENABLED 1
 
 
 # Barometer setup
-#BARO BMP388 I2C:0:0x76
+BARO BMP388 I2C:0:0x76
         
 # IMU setup
 
 # IMU setup
-IMU Invensensev3 I2C:0:icm42670 ROTATION_NONE
+#IMU Invensensev3 I2C:0:0x68 ROTATION_NONE
 
 # Mag Setup
 #COMPASS MMC5XX3 I2C:0:0x30 false ROTATION_NONE
