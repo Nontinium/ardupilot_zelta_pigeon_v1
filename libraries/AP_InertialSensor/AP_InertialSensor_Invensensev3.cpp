@@ -979,8 +979,8 @@ void AP_InertialSensor_Invensensev3::set_filter_and_scaling(void)
  */
 void AP_InertialSensor_Invensensev3::set_filter_and_scaling_icm42670(void)
 {
-    backend_rate_hz = 1600;
-    sampling_rate_hz = 1600;
+    backend_rate_hz = 200;
+    sampling_rate_hz = 200;
     // use low-noise mode
     register_write(INV3REG_70_PWR_MGMT0, 0x0f);
     hal.scheduler->delay_microseconds(300);
